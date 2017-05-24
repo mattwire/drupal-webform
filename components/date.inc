@@ -476,7 +476,7 @@ function webform_validate_date($element, $form_state) {
  */
 function _webform_submit_date($component, $value) {
   // Deal with multiple-value dates.
-  if (module_exists('wfm') && wfm_is_multiple($component) && isset($value[0])) {
+  if (module_exists('wfm') && !isset($value['year'])) {
     foreach ($value as &$element) {
       $element = _webform_submit_date($component, $element);
     }
