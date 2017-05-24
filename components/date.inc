@@ -476,7 +476,15 @@ function webform_validate_date($element, $form_state) {
  */
 function _webform_submit_date($component, $value) {
   // Convert the date to an ISO 8601 format.
+  if (!isset($value['year'])) {
+    foreach ($value as $key => $dateArray) {
+      $dateString = webform_date_string($dateArray, 'date');
+      $value[$key] = $dateString;
+    }
+    return $value;
+  }
   return ($value['year'] && $value['month'] && $value['day']) ? webform_date_string($value, 'date') : '';
+
 }
 
 /**
